@@ -86,3 +86,9 @@ gem 'jwt'
 
 # For Initializing Provide client like google,github,etc..
 gem 'httpclient'
+
+# Mail Chimp Gem
+gem 'gibbon'
+
+# SendGrid For Mailr
+gem 'sendgrid-rails', '~> 2.0'

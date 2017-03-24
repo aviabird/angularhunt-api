@@ -19,5 +19,21 @@ module Api::V0
     def set_project
       @project = Project.find(params[:id])
     end
+
+
+    # TODO: Lot of corner case handling;
+    def subscribe_to_newsletter
+      # SubscribeUserToMailingListJob.perform_now(params[:email]);
+
+      gb = Gibbon::Request.new
+
+      list_id = ENV["MAILCHIMP_LIST_ID"]
+
+      gb.lists(list_id)
+        .members
+        .create(body: { email_address: params[:email], status: "subscribed"})
+
+      render_success("Successfully Subscribed")
+    end
   end
 end

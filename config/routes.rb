@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       post 'users/user_detail', to: 'users#user_detail'
       get 'projects/all_projects', to: 'projects#all_projects'
       post 'projects/upvote', to: 'projects#upvote'
+      post 'projects/subscribe_to_newsletter', to: 'projects#subscribe_to_newsletter'
     end
   end
 end
