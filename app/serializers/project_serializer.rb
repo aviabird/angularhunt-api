@@ -19,8 +19,13 @@
 class ProjectSerializer < ActiveModel::Serializer
   attributes :id, :user_id, :git_url, :description, :demo_url,
              :author_name, :name, :caption, :twitter_id, 
-             :approved, :created_at, :is_liked_by_current_user, :project_likes_count,
+             :approved, :created_at, :image_url,
+             :is_liked_by_current_user, :project_likes_count,
 
+
+  def image_url
+    object.image_url ? object.image_url : "http://www.adweek.com/core/wp-content/uploads/files/news_article/project-isaac-hed-2013_0.jpg"
+  end
 
   def is_liked_by_current_user
     return false unless current_user
