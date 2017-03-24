@@ -18,6 +18,9 @@
 #  role_id                :integer
 #  google                 :string
 #  display_name           :string
+#  image_url              :string
+#  first_name             :string
+#  last_name              :string
 #
 
 class User < ApplicationRecord
@@ -86,10 +89,13 @@ class User < ApplicationRecord
     fallback_first_name  = fallback_name.try(:first)
     fallback_last_name   = fallback_name.try(:last)
 
-    # Note: To be added Latter
-    #========================= 
-    # user.first_name    ||= (params[:first_name] || fallback_first_name)
-    # user.last_name     ||= (params[:last_name]  || fallback_last_name)
+    user.first_name    ||= (params[:first_name] || fallback_first_name)
+    user.last_name     ||= (params[:last_name]  || fallback_last_name)
+
+    if user.image_url.blank?
+      # user.image = Image.new(name: user.full_name, remote_file_url: params[:image_url])
+      user.image_url = params[:image_url]
+    end
 
     # User PaperCLip here with Image Model
     # ====================================
@@ -109,7 +115,6 @@ class User < ApplicationRecord
     user
   end
 
-
   def displayName= name
     self.display_name = name
   end
@@ -121,5 +126,4 @@ class User < ApplicationRecord
   def self.current
     Thread.current[:current_user]
   end
-
 end

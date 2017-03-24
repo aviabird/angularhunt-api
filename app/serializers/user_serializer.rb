@@ -18,7 +18,16 @@
 #  role_id                :integer
 #  google                 :string
 #  display_name           :string
+#  image_url              :string
+#  first_name             :string
+#  last_name              :string
 #
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :display_name 
+  attributes :id, :email, :display_name, 
+             :first_name, :last_name, :image_url
+
+  def display_name
+    "#{first_name last_name}" 
+  end
+
 end
